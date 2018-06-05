@@ -24,6 +24,6 @@ class Api::LogEntriesController < ApplicationController
   end
 
   def validate_twilio_request
-    params[:From] == "+#{Rails.application.secrets.twilio_phone_number}"
+    params[:From] == "+#{ENV['TWILIO_ACCOUNT_NUMBER']}"
   end
 end

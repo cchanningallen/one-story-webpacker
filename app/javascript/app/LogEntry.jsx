@@ -31,7 +31,7 @@ const LogEntry = ({ category, content, datetime, classes, ...props }) => (
       <div className={classes.details}>
         <Caption>{moment(datetime).calendar(null, { sameElse: 'M/D/YY' })}</Caption>
         <Caption>&nbsp;•&nbsp;</Caption>
-        <Caption>{category}</Caption>
+        <Caption>{category || 'thought'}</Caption>
       </div>
     </div>
   </div>
