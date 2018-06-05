@@ -1,7 +1,33 @@
-import Typography from 'material-ui/Typography';
+import React from 'react';
 
-const Text = props => <Typography type="body1" style={{ whiteSpace: 'pre-wrap', display: 'inline-block' }} {...props} />;
-export const Title = props => <Typography type="title" {...props} />;
-export const Caption = props => <Typography type="caption" {...props} />;
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
-export default Typography;
+const styles = theme => ({
+  root: {
+    whiteSpace: 'pre-wrap',
+    display: 'inline-block',
+  },
+});
+
+export const Text = ({ classes, ...props }) => {
+  const className = classes.root;
+
+  return (
+    <Typography
+      className={className}
+      {...props}
+    />
+  )
+};
+
+Text.defaultProps = {
+  variant: 'body1',
+};
+
+const StyledText = withStyles(styles)(Text);
+
+export const Title = props => <StyledText variant="title" {...props} />;
+export const Caption = props => <StyledText variant="caption" {...props} />;
+
+export default StyledText;

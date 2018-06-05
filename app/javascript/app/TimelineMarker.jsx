@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import { withStyles } from 'material-ui/styles';
-import grey from 'material-ui/colors/grey';
+import { withStyles } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
 
-import Avatar from 'material-ui/Avatar';
-import RadioButtonUncheckedIcon from 'material-ui-icons/RadioButtonUnchecked';
+import Avatar from '@material-ui/core/Avatar';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 const styles = {
-  avatar: {
+  root: {
     color: grey[500],
     backgroundColor: grey[100],
   },
@@ -15,7 +15,7 @@ const styles = {
 
 const TimelineMarker = ({ ...props }) => (
   <Avatar {...props}>
-    <RadioButtonUncheckedIcon />
+    <RadioButtonUncheckedIcon color="primary" />
   </Avatar>
 );
 

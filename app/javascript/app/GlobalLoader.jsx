@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LinearProgress } from 'material-ui/Progress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default class GlobalLoader extends Component {
   state = { completed: 0 };
@@ -23,6 +23,6 @@ export default class GlobalLoader extends Component {
   };
 
   render() {
-    return <LinearProgress mode="determinate" value={this.state.completed} />;
+    return <LinearProgress variant="determinate" value={this.state.completed} />;
   }
 };

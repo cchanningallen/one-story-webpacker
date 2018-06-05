@@ -1,39 +1,12 @@
-// import React from 'react';
-// import AppBar from 'material-ui/AppBar';
-// import Toolbar from 'material-ui/Toolbar';
-//
-// import Text from 'components/Text';
-//
-// const App = props => (
-//   <div>
-//     <AppBar position="static" color="default">
-//       <Toolbar>
-//         <Text type="title" color="secondary">One</Text>
-//         <Text type="title" color="textSecondary">Story</Text>
-//       </Toolbar>
-//     </AppBar>
-//
-//
-//   </div>
-// );
-//
-// export default App;
-
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
-import { withStyles } from 'material-ui/styles';
-import grey from 'material-ui/colors/grey';
-
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
-import RadioButtonUncheckedIcon from 'material-ui-icons/RadioButtonUnchecked';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import GlobalLoader from 'app/GlobalLoader';
 import LogEntry from 'app/LogEntry';
+import Text, { Title, Caption } from 'components/Text';
 
 const spacing = {
   none: 0,
@@ -45,14 +18,15 @@ const spacing = {
 
 const AppShell = styled.div`
   height: 100%;
-  background: #fff;  
+  background: transparent;  
 `;
 
 const MainContainer = styled.div`
   padding: ${spacing.md}px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 `;
-
-
 
 class App extends Component {
   state = { loading: true };
@@ -60,10 +34,6 @@ class App extends Component {
   componentDidMount() {
     this.fetch('api/log_entries')
       .then(logEntries => this.setState({ logEntries, loading: false }));
-  }
-
-  renderLogEntries(logEntries) {
-    return logEntries.map(logEntry => <LogEntry {...logEntry} />)
   }
 
   fetch (endpoint) {
@@ -83,13 +53,15 @@ class App extends Component {
         {!logEntries && <GlobalLoader />}
         <AppBar position="static" color="default">
           <Toolbar>
-            <Title color="secondary">One</Title>
+            <Title color="primary">One</Title>
             <Title>Story</Title>
           </Toolbar>
         </AppBar>
 
         <MainContainer>
-          {logEntries && this.renderLogEntries(logEntries)}
+          {logEntries && logEntries.map((logEntry, key) =>
+            <LogEntry key={key} {...logEntry} />
+          )}
         </MainContainer>
       </AppShell>
     );
