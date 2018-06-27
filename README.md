@@ -29,6 +29,16 @@ bundle exec rails s
 ./bin/webpack-dev-server
 ```
 
+### Twilio
+
+  1. Run this locally:
+    ```bash
+    ngrok http 3000
+    ```
+  1. Save randomly-generated URL in Twilio console:
+  https://www.twilio.com/docs/voice/client/tutorials/how-to-set-up-a-server-for-twilio-client#running-locally-using-ngrok
+  1. Profit.
+
 ## Misc
 
 ### Find an icon
