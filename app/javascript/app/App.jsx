@@ -8,6 +8,8 @@ import GlobalLoader from 'app/GlobalLoader';
 import LogEntry from 'app/LogEntry';
 import Text, { Title, Caption } from 'components/Text';
 
+const POLL_TIMEOUT = 3000;
+
 const spacing = {
   none: 0,
   xs: 8,
@@ -29,11 +31,31 @@ const MainContainer = styled.div`
 `;
 
 class App extends Component {
-  state = { loading: true };
+  state = {
+    loading: true,
+    polling: false,
+  };
 
   componentDidMount() {
-    this.fetch('api/log_entries')
+    this.fetchLogEntries()
       .then(logEntries => this.setState({ logEntries, loading: false }));
+
+    // TODO: Do sthg w polling in UI
+    this.setState({ polling: true }, () => this.poll());
+  }
+
+  poll() {
+    setTimeout(
+      () => this.fetchLogEntries().then(logEntries => {
+        this.setState({ logEntries });
+        this.poll();
+      }),
+      POLL_TIMEOUT
+    );
+  }
+
+  fetchLogEntries() {
+    return this.fetch('api/log_entries');
   }
 
   fetch (endpoint) {
@@ -51,7 +73,7 @@ class App extends Component {
     return (
       <AppShell>
         {!logEntries && <GlobalLoader />}
-        <AppBar position="static" color="default">
+        <AppBar position="sticky" color="default">
           <Toolbar>
             <Title color="primary">One</Title>
             <Title>Story</Title>

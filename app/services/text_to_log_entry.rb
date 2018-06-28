@@ -20,13 +20,17 @@ class TextToLogEntry
       )
     end
 
-    LogEntry.create(
-      content:line,
-      datetime: DateTime.now,
-    )
+    create_default(line)
   end
 
   def create_from_multi_line_text
+    create_default(@text_body)
+  end
 
+  def create_default(content)
+    LogEntry.create(
+      content: content,
+      datetime: DateTime.now,
+    )
   end
 end

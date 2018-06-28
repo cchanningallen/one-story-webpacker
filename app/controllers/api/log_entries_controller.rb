@@ -11,10 +11,7 @@ class Api::LogEntriesController < ApplicationController
   end
 
   def text
-    ap "*"*100
-    ap "RECEIVED A TEXT!!!"
     ap TextToLogEntry.new(text_params[:Body]).create
-    ap "*"*100
   end
 
   private
